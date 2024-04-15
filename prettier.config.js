@@ -1,9 +1,7 @@
-// @ts-check
-
 /** @type {import('prettier').Config} */
 const config = {
 	semi: true,
-	singleQuote: false,
+	singleQuote: true,
 	trailingComma: "all",
 	useTabs: true,
 	tabWidth: 2,
