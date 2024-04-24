@@ -16,7 +16,9 @@
     "ci": "pnpm run lint && pnpm run test && pnpm run build"
   },
   "files": [
-    "dist"
+    "dist",
+		"CHANGELOG.md",
+		"README.md"
   ],
   "keywords": [
     "form",
