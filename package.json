@@ -4,9 +4,8 @@
 	"description": "A model-driven, simple and typesafe approach to forms",
 	"main": "index.js",
 	"scripts": {
-		"build:all": "pnpm -r build",
-		"test:all": "pnpm -r test",
-		"dev:forms-core": "pnpm --filter ./packages/forms-core -r dev"
+		"dev:core": "pnpm --filter ./packages/forms-core -r dev",
+		"dev:react": "pnpm --filter ./packages/react-forms -r dev"
 	},
 	"keywords": [
 		"form",

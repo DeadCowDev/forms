@@ -3,7 +3,7 @@
 	"author": "Deadcow.enterprises",
 	"license": "MIT",
   "version": "0.0.0",
-	"private": true,
+	"private": false,
   "description": "Agnostic model-driven simple and typesafe approach to forms. The core of Forms",
 	"main": "./dist/index.js",
   "module": "./dist/index.mjs",
