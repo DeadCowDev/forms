@@ -4,7 +4,8 @@
 	"description": "A model-driven, simple and typesafe approach to forms",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build:all": "pnpm -r build",
+		"dev:forms-core": "pnpm --filter ./packages/forms-core -r dev"
 	},
 	"keywords": [
 		"form",
@@ -14,10 +15,15 @@
 	"author": "Deadcow.enterprises",
 	"license": "MIT",
 	"devDependencies": {
-		"@types/eslint": "^8.56.7",
-		"eslint": "^9.0.0",
+		"@vitest/coverage-istanbul": "^1.5.1",
+		"@vitest/ui": "^1.5.1",
+		"jsdom": "^22.1.0",
 		"prettier": "^3.2.5",
+		"tsup": "^8.0.2",
 		"typescript": "^5.4.4",
-		"vitest": "^1.4.0"
+		"vitest": "^1.5.1"
+	},
+	"dependencies": {
+		"zod": "^3.22.4"
 	}
 }
