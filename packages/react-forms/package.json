@@ -21,6 +21,9 @@
     "typescript",
     "react"
   ],
+	"files": [
+    "dist"
+  ],
   "devDependencies": {
     "@testing-library/react": "^14.0.0",
     "@types/react": "^18.2.28",
