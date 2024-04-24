@@ -1,5 +1,13 @@
 # @deadcow-enterprises/react-forms
 
+## 0.0.2
+
+### Patch Changes
+
+- 8c77651: fix publish ignores
+- Updated dependencies [8c77651]
+  - @deadcow-enterprises/forms-core@0.0.2
+
 ## 0.0.1
 
 ### Patch Changes

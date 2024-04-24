@@ -2,7 +2,7 @@
   "name": "@deadcow-enterprises/react-forms",
   "author": "Deadcow.enterprises",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "description": "Agnostic model-driven simple and typesafe approach to forms in react.",
   "main": "./dist/index.js",
@@ -21,7 +21,7 @@
     "typescript",
     "react"
   ],
-	"files": [
+  "files": [
     "dist"
   ],
   "devDependencies": {
