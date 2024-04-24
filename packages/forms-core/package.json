@@ -2,7 +2,7 @@
   "name": "@deadcow-enterprises/forms-core",
   "author": "Deadcow.enterprises",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "description": "Agnostic model-driven simple and typesafe approach to forms. The core of Forms",
   "main": "./dist/index.js",
@@ -17,8 +17,8 @@
   },
   "files": [
     "dist",
-		"CHANGELOG.md",
-		"README.md"
+    "CHANGELOG.md",
+    "README.md"
   ],
   "keywords": [
     "form",
