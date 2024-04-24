@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"scripts": {
 		"build:all": "pnpm -r build",
+		"test:all": "pnpm -r test",
 		"dev:forms-core": "pnpm --filter ./packages/forms-core -r dev"
 	},
 	"keywords": [
