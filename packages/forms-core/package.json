@@ -1,23 +1,23 @@
 {
   "name": "@deadcow-enterprises/forms-core",
-	"author": "Deadcow.enterprises",
-	"license": "MIT",
-  "version": "0.0.0",
-	"private": false,
+  "author": "Deadcow.enterprises",
+  "license": "MIT",
+  "version": "0.0.1",
+  "private": false,
   "description": "Agnostic model-driven simple and typesafe approach to forms. The core of Forms",
-	"main": "./dist/index.js",
+  "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
-		"dev": "vitest watch --ui",
+    "dev": "vitest watch --ui",
     "test": "vitest run",
-		"lint": "tsc",
+    "lint": "tsc",
     "ci": "pnpm run lint && pnpm run test && pnpm run build"
   },
   "keywords": [
-		"form",
+    "form",
     "zod",
     "typescript"
-	]
+  ]
 }
