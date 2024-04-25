@@ -1,5 +1,11 @@
 # @deadcow-enterprises/forms-core
 
+## 0.0.4
+
+### Patch Changes
+
+- c19f664: minify output
+
 ## 0.0.3
 
 ### Patch Changes
