@@ -12,7 +12,7 @@ This package provides a powerful and flexible solution for creating model-driven
 
 ## Installation and usage
 
-First install react-form-hook:
+First install react-forms:
 
 ```bash
 npm i @deadcow-enterprises/react-forms
