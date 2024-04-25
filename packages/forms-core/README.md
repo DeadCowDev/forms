@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This package provides a powerful and flexible solution for creating model-driven forms. This is the main core of Forms.
+This package provides a powerful and flexible solution for creating model-driven forms. This is the main core of Forms. You can use it in the browser, on the server or wrap it in a framework with minimal code needed.
 
 ## Features
 
