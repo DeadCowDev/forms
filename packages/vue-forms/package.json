@@ -1,0 +1,39 @@
+{
+  "name": "@deadcow-enterprises/vue-forms",
+  "author": "Deadcow.enterprises",
+  "license": "MIT",
+  "version": "0.0.0",
+  "private": false,
+  "description": "Agnostic model-driven simple and typesafe approach to forms in Vue.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+	"repository": "https://github.com/DeadCowDev/forms",
+  "homepage": "https://github.com/DeadCowDev/forms",
+  "scripts": {
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify --clean",
+    "dev": "vitest watch --ui",
+    "test": "vitest run",
+    "lint": "tsc",
+    "ci": "pnpm run lint && pnpm run test && pnpm run build"
+  },
+  "keywords": [
+    "form",
+    "zod",
+    "typescript",
+    "vue"
+  ],
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "README.md"
+  ],
+  "devDependencies": {},
+  "dependencies": {
+    "@deadcow-enterprises/forms-core": "workspace:*"
+  },
+  "peerDependencies": {
+		"vue": "^3.4.25",
+    "zod": "^3.22.4"
+  }
+}
