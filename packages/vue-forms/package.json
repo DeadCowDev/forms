@@ -8,7 +8,7 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-	"repository": "https://github.com/DeadCowDev/forms",
+  "repository": "https://github.com/DeadCowDev/forms",
   "homepage": "https://github.com/DeadCowDev/forms",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --minify --clean",
@@ -28,12 +28,14 @@
     "CHANGELOG.md",
     "README.md"
   ],
-  "devDependencies": {},
+  "devDependencies": {
+    "@testing-library/vue": "^8.0.3"
+  },
   "dependencies": {
     "@deadcow-enterprises/forms-core": "workspace:*"
   },
   "peerDependencies": {
-		"vue": "^3.4.25",
+    "vue": "^3.4.25",
     "zod": "^3.22.4"
   }
 }

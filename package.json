@@ -6,6 +6,7 @@
 	"scripts": {
 		"dev:core": "pnpm --filter ./packages/forms-core -r dev",
 		"dev:react": "pnpm --filter ./packages/react-forms -r dev",
+		"dev:vue": "pnpm --filter ./packages/vue-forms -r dev",
 		"release": "pnpm run -r ci && changeset publish"
 	},
 	"keywords": [
