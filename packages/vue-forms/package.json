@@ -2,7 +2,7 @@
   "name": "@deadcow-enterprises/vue-forms",
   "author": "Deadcow.enterprises",
   "license": "MIT",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": false,
   "description": "Agnostic model-driven simple and typesafe approach to forms in Vue.",
   "main": "./dist/index.js",
