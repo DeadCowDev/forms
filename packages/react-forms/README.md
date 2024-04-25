@@ -33,16 +33,16 @@ type LoginModel = {
 
 function App() {
   const form =useForm<LoginModel>(
-			{
-				username: {
-					value: "",
-					validator: z.string().min(1, "Username is required"),
-				},
-				password: {
-					value: "",
-					validator: z.string().min(1, "Password is required"),
-				},
-			});
+		{
+		username: {
+			value: "",
+			validator: z.string().min(1, "Username is required"),
+		},
+		password: {
+			value: "",
+			validator: z.string().min(1, "Password is required"),
+		},
+	});
   const login = (formValue: LoginModel) => {
     // do something with formValue here like send it to the server
     console.log(formValue);
