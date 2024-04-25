@@ -9,7 +9,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "build": "tsup src/index.ts --format cjs,esm --dts --minify --clean",
     "dev": "vitest watch --ui",
     "test": "vitest run",
     "lint": "tsc",
