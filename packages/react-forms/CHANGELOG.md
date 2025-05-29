@@ -1,5 +1,16 @@
 # @deadcow-enterprises/react-forms
 
+## 0.2.0
+
+### Minor Changes
+
+- 025332e: Add support for focus on error and form state listeners
+
+### Patch Changes
+
+- Updated dependencies [025332e]
+  - @deadcow-enterprises/forms-core@0.2.0
+
 ## 0.1.0
 
 ### Minor Changes
