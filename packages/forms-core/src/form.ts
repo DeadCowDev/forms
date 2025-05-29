@@ -8,7 +8,7 @@ import {
 	FormResult,
 	OnChangeFormState,
 } from './types';
-import { generateId } from "./utils";
+import { generateId } from './utils';
 
 export class Form<
 	T extends BaseFormType,
@@ -40,7 +40,7 @@ export class Form<
 	private setupIds(v: FormOptions<T>) {
 		const result: FormResult<T>['ids'] = {};
 		Object.keys(v).forEach((k: keyof T) => {
-			const valueId = v[k]?.id ?? uuid();
+			const valueId = v[k]?.id ?? generateId();
 			result[k] = `form-${this.id}-field-${valueId}`;
 		});
 		return result;
