@@ -8,13 +8,13 @@ import {
 	FormResult,
 	OnChangeFormState,
 } from './types';
-import { v4 as uuid } from 'uuid';
+import { generateId } from "./utils";
 
 export class Form<
 	T extends BaseFormType,
 	TFormType extends FormEvent = FormEvent,
 > {
-	private readonly id = uuid();
+	private readonly id = generateId();
 	private initialValue: T;
 	private value: T;
 	private dirty = false;
