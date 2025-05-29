@@ -9,6 +9,7 @@ import {
 	OnChangeFormState,
 } from './types';
 import { v4 as uuid } from 'uuid';
+import { StandardSchemaV1 } from '@standard-schema/spec';
 
 export class Form<
 	T extends BaseFormType,
@@ -90,12 +91,16 @@ export class Form<
 			if (validator) {
 				const result =
 					typeof validator === 'function' ? validator(this.value) : validator;
-				const error = result.safeParse(value);
-				if (error.success) {
+
+				const error = result.validate(value);
+				if (error instanceof Promise) {
+					return;
+				}
+				if (!error.issues) {
 					return;
 				}
 
-				errors[k] = error.error.errors.map((e) => e.message);
+				errors[k] = error.issues.map((e) => e.message);
 			}
 		});
 
@@ -173,13 +178,17 @@ export class Form<
 			typeof propertyValidator === 'function'
 				? propertyValidator(this.value)
 				: propertyValidator;
-		const validatorResult = validator.safeParse(value);
+		const validatorResult = validator.validate(value);
 
-		if (validatorResult.success) {
+		if (validatorResult instanceof Promise) {
 			return undefined;
 		}
 
-		return validatorResult.error.errors.map((e) => e.message);
+		if (!validatorResult.issues) {
+			return undefined;
+		}
+
+		return validatorResult.issues.map((e) => e.message);
 	}
 
 	private handleSubmit(

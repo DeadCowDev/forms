@@ -27,6 +27,7 @@
 		"vitest": "^1.5.1"
 	},
 	"dependencies": {
+		"@standard-schema/spec": "^1.0.0",
 		"uuid": "^11.1.0",
 		"zod": "^3.22.4"
 	}

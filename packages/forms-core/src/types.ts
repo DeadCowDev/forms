@@ -1,11 +1,13 @@
-import { ZodSchema } from 'zod';
+import { StandardSchemaV1 } from '@standard-schema/spec';
 
 export type FormError = string[] | undefined;
 
 export type FormListenerFn = () => void;
 export interface FormValueOption<T, TForm> {
 	value: T;
-	validator?: ZodSchema<T> | ((currentForm: TForm) => ZodSchema<T>);
+	validator?:
+		| StandardSchemaV1.Props<T>
+		| ((currentForm: TForm) => StandardSchemaV1.Props<T>);
 	id?: string;
 }
 
