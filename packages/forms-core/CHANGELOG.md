@@ -1,5 +1,11 @@
 # @deadcow-enterprises/forms-core
 
+## 0.2.1
+
+### Patch Changes
+
+- 3848e58: Remove uuid dependency
+
 ## 0.2.0
 
 ### Minor Changes
