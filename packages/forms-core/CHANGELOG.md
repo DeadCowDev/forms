@@ -1,5 +1,11 @@
 # @deadcow-enterprises/forms-core
 
+## 0.2.0
+
+### Minor Changes
+
+- 025332e: Add support for focus on error and form state listeners
+
 ## 0.1.0
 
 ### Minor Changes
