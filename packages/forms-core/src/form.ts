@@ -1,25 +1,62 @@
-import { BaseFormType, FormError, FormEvent, FormOptions, FormResult, OnChangeFormState } from "./types";
+import {
+	BaseFormType,
+	FormConfig,
+	FormError,
+	FormEvent,
+	FormListenerFn,
+	FormOptions,
+	FormResult,
+	OnChangeFormState,
+} from './types';
+import { v4 as uuid } from 'uuid';
 
-export class Form<T extends BaseFormType, TFormType extends FormEvent = FormEvent> {
+export class Form<
+	T extends BaseFormType,
+	TFormType extends FormEvent = FormEvent,
+> {
+	private readonly id = uuid();
 	private initialValue: T;
 	private value: T;
 	private dirty = false;
-	private errors: FormResult<T>["errors"] = {}
+	private errors: FormResult<T>['errors'] = {};
 	private loading = false;
+	private readonly ids: FormResult<T>['ids'] = {};
 
 	private listeners: OnChangeFormState<T, TFormType>[] = [];
 
-	constructor(private readonly config: FormOptions<T>) {
+	private errorListener?: FormListenerFn;
+	private formValidListener?: FormListenerFn;
+
+	constructor(
+		private readonly config: FormOptions<T>,
+		private readonly opts?: FormConfig,
+	) {
 		this.initialValue = this.getValueFromOptions(config);
 		this.value = this.getValueFromOptions(config);
+		this.registerFormListeners();
+		this.ids = this.setupIds(config);
 	}
 
-	listen(cb: OnChangeFormState<T, TFormType>): () => void{
+	private setupIds(v: FormOptions<T>) {
+		const result: FormResult<T>['ids'] = {};
+		Object.keys(v).forEach((k: keyof T) => {
+			const valueId = v[k]?.id ?? uuid();
+			result[k] = `form-${this.id}-field-${valueId}`;
+		});
+		return result;
+	}
+
+	private registerFormListeners() {
+		this.errorListener = this.opts?.onError;
+		this.formValidListener = this.opts?.onFormValid;
+	}
+
+	listen(cb: OnChangeFormState<T, TFormType>): () => void {
 		this.listeners.push(cb);
 		cb(this.currentState);
 		return () => {
-			this.listeners = this.listeners.filter(l => l !== cb);
-		}
+			this.listeners = this.listeners.filter((l) => l !== cb);
+		};
 	}
 
 	get currentState(): FormResult<T, TFormType> {
@@ -29,6 +66,7 @@ export class Form<T extends BaseFormType, TFormType extends FormEvent = FormEven
 			errors: this.errors,
 			loading: this.loading,
 			value: this.value,
+			ids: this.ids,
 			markAsDirty: this.markAsDirty.bind(this),
 			addError: this.addError.bind(this),
 			reset: this.reset.bind(this),
@@ -46,30 +84,70 @@ export class Form<T extends BaseFormType, TFormType extends FormEvent = FormEven
 	private updateValidity(): boolean {
 		const errors: typeof this.errors = {};
 
-    Object.keys(this.config).forEach((k: keyof T) => {
-      const validator = this.config[k].validator;
-      const value = this.value[k];
-      if (validator) {
-        const result =
-          typeof validator === "function"
-            ? validator(this.value)
-            : validator;
-        const error = result.safeParse(value);
-        if (error.success) {
-          return;
-        }
+		Object.keys(this.config).forEach((k: keyof T) => {
+			const validator = this.config[k].validator;
+			const value = this.value[k];
+			if (validator) {
+				const result =
+					typeof validator === 'function' ? validator(this.value) : validator;
+				const error = result.safeParse(value);
+				if (error.success) {
+					return;
+				}
 
-        errors[k] = error.error.errors.map((e) => e.message);
-      }
-    });
+				errors[k] = error.error.errors.map((e) => e.message);
+			}
+		});
 
 		this.errors = errors;
 		this.notify();
-    return Object.keys(errors).length === 0;
+		this.handleFormErrorsIfAny();
+		this.handleFormIfValid();
+		return Object.keys(errors).length === 0;
+	}
+
+	private handleFormErrorsIfAny() {
+		if (Object.keys(this.errors).length === 0) {
+			return;
+		}
+		this.errorListener?.();
+
+		if (this.opts?.focusOnError) {
+			const errorIds = Object.keys(this.errors).map(
+				(k: keyof T) => this.ids[k] as string,
+			);
+			let firstElement: HTMLElement = undefined as unknown as HTMLElement;
+			let firstIndex = Infinity;
+
+			errorIds.forEach((id) => {
+				const el = id ? document.getElementById(id) : null;
+				if (!el) {
+					return;
+				}
+				const index = Array.prototype.indexOf.call(
+					document.body.getElementsByTagName('*'),
+					el,
+				);
+				if (index !== -1 && index < firstIndex) {
+					firstElement = el;
+					firstIndex = index;
+				}
+			});
+			if (firstElement) {
+				firstElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				firstElement.focus();
+			}
+		}
+	}
+	private handleFormIfValid() {
+		if (Object.keys(this.errors).length !== 0) {
+			return;
+		}
+		this.formValidListener?.();
 	}
 
 	private addError(k: keyof T, error: string): void {
-		const errorsList = this.errors[k] || []
+		const errorsList = this.errors[k] || [];
 		errorsList.push(error);
 		this.errors[k] = errorsList;
 		this.notify();
@@ -79,8 +157,7 @@ export class Form<T extends BaseFormType, TFormType extends FormEvent = FormEven
 		if (newValue) this.initialValue = newValue;
 		this.value = this.initialValue;
 		this.errors = {};
-		this.dirty = false,
-		this.loading = false;
+		(this.dirty = false), (this.loading = false);
 		this.notify();
 	}
 
@@ -93,19 +170,21 @@ export class Form<T extends BaseFormType, TFormType extends FormEvent = FormEven
 		if (!propertyValidator) return;
 
 		const validator =
-		typeof propertyValidator === "function"
-			? propertyValidator(this.value)
-			: propertyValidator;
-	const validatorResult = validator.safeParse(value);
+			typeof propertyValidator === 'function'
+				? propertyValidator(this.value)
+				: propertyValidator;
+		const validatorResult = validator.safeParse(value);
 
-	if (validatorResult.success) {
-		return undefined;
+		if (validatorResult.success) {
+			return undefined;
+		}
+
+		return validatorResult.error.errors.map((e) => e.message);
 	}
 
-	return validatorResult.error.errors.map((e) => e.message);
-	}
-
-	private handleSubmit(cb: (v: T) => void | Promise<void>): (ev: TFormType) => void {
+	private handleSubmit(
+		cb: (v: T) => void | Promise<void>,
+	): (ev: TFormType) => void {
 		return async (ev) => {
 			ev.stopPropagation();
 			ev.preventDefault();
@@ -125,21 +204,18 @@ export class Form<T extends BaseFormType, TFormType extends FormEvent = FormEven
 				this.loading = false;
 				this.notify();
 			}
-		}
+		};
 	}
 
 	private notify() {
-		this.listeners.forEach(l => l(this.currentState))
+		this.listeners.forEach((l) => l(this.currentState));
 	}
 
-	private getValueFromOptions(
-		v: FormOptions<T>
-	): T {
+	private getValueFromOptions(v: FormOptions<T>): T {
 		const result: Record<string, unknown> = {};
 		Object.keys(v).forEach((k) => {
 			result[k] = v[k]?.value;
 		});
 		return result as T;
-	};
-
+	}
 }
