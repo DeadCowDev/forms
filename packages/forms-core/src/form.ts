@@ -2,6 +2,7 @@ import {
 	BaseFormType,
 	FormConfig,
 	FormError,
+	FormErrorListenerFn,
 	FormEvent,
 	FormListenerFn,
 	FormOptions,
@@ -24,7 +25,7 @@ export class Form<
 
 	private listeners: OnChangeFormState<T, TFormType>[] = [];
 
-	private errorListener?: FormListenerFn;
+	private errorListener?: FormErrorListenerFn;
 	private formValidListener?: FormListenerFn;
 
 	constructor(
@@ -64,6 +65,7 @@ export class Form<
 			dirty: this.dirty,
 			pristine: !this.dirty,
 			errors: this.errors,
+			currentErrors: this.getCurrentErrors(),
 			loading: this.loading,
 			value: this.value,
 			ids: this.ids,
@@ -82,6 +84,16 @@ export class Form<
 	}
 
 	private updateValidity(): boolean {
+		const errors = this.getCurrentErrors();
+
+		this.errors = errors;
+		this.notify();
+		this.handleFormErrorsIfAny();
+		this.handleFormIfValid();
+		return Object.keys(errors).length === 0;
+	}
+
+	private getCurrentErrors(): FormResult<T>['errors'] {
 		const errors: typeof this.errors = {};
 
 		Object.keys(this.config).forEach((k: keyof T) => {
@@ -98,19 +110,17 @@ export class Form<
 				errors[k] = error.error.errors.map((e) => e.message);
 			}
 		});
-
-		this.errors = errors;
-		this.notify();
-		this.handleFormErrorsIfAny();
-		this.handleFormIfValid();
-		return Object.keys(errors).length === 0;
+		return errors;
 	}
 
 	private handleFormErrorsIfAny() {
 		if (Object.keys(this.errors).length === 0) {
 			return;
 		}
-		this.errorListener?.();
+		const errorList = Object.values(this.errors)
+			.map((e) => e ?? [])
+			.flat();
+		this.errorListener?.(errorList);
 
 		if (this.opts?.focusOnError) {
 			const errorIds = Object.keys(this.errors).map(

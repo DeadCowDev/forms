@@ -3,6 +3,7 @@ import { ZodSchema } from 'zod';
 export type FormError = string[] | undefined;
 
 export type FormListenerFn = () => void;
+export type FormErrorListenerFn = (errors: string[]) => void;
 export interface FormValueOption<T, TForm> {
 	value: T;
 	validator?: ZodSchema<T> | ((currentForm: TForm) => ZodSchema<T>);
@@ -23,6 +24,7 @@ export interface FormResult<T, TFormType extends FormEvent = FormEvent> {
 	pristine: boolean;
 	loading: boolean;
 	errors: { [P in keyof T]?: FormError };
+	currentErrors: { [P in keyof T]?: FormError };
 	ids: { [P in keyof T]?: string };
 	markAsDirty: () => void;
 	updateValidity: () => boolean;
@@ -38,8 +40,8 @@ export type OnChangeFormState<T, TForm extends FormEvent = FormEvent> = (
 	newFormValue: FormResult<T, TForm>,
 ) => void;
 
-export type FormConfig = {
+export interface FormConfig {
 	focusOnError?: boolean;
-	onError?: FormListenerFn;
+	onError?: FormErrorListenerFn;
 	onFormValid?: FormListenerFn;
-};
+}
