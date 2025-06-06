@@ -1,5 +1,16 @@
 # @deadcow-enterprises/vue-forms
 
+## 0.3.0
+
+### Minor Changes
+
+- 46663a0: Add current error state and add errors list in error callback
+
+### Patch Changes
+
+- Updated dependencies [46663a0]
+  - @deadcow-enterprises/forms-core@0.3.0
+
 ## 0.2.1
 
 ### Patch Changes

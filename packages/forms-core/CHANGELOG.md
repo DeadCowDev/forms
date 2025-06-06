@@ -1,5 +1,11 @@
 # @deadcow-enterprises/forms-core
 
+## 0.3.0
+
+### Minor Changes
+
+- 46663a0: Add current error state and add errors list in error callback
+
 ## 0.2.1
 
 ### Patch Changes
