@@ -26,6 +26,7 @@ export interface FormResult<T, TFormType extends FormEvent = FormEvent> {
 	errors: { [P in keyof T]?: FormError };
 	currentErrors: { [P in keyof T]?: FormError };
 	ids: { [P in keyof T]?: string };
+	notify: () => void;
 	markAsDirty: () => void;
 	updateValidity: () => boolean;
 	addError: (k: keyof T, error: string) => void;

@@ -75,6 +75,7 @@ export class Form<
 			updateValidity: this.updateValidity.bind(this),
 			handleSubmit: this.handleSubmit.bind(this),
 			setValue: this.setValue.bind(this),
+			notify: this.notify.bind(this),
 		};
 	}
 
