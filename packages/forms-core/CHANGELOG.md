@@ -1,5 +1,11 @@
 # @deadcow-enterprises/forms-core
 
+## 0.4.0
+
+### Minor Changes
+
+- 784488a: Expose notify function
+
 ## 0.3.0
 
 ### Minor Changes
