@@ -1,5 +1,16 @@
 # @deadcow-enterprises/react-forms
 
+## 0.4.0
+
+### Minor Changes
+
+- 784488a: Expose notify function
+
+### Patch Changes
+
+- Updated dependencies [784488a]
+  - @deadcow-enterprises/forms-core@0.4.0
+
 ## 0.3.0
 
 ### Minor Changes
