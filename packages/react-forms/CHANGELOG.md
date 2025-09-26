@@ -1,5 +1,16 @@
 # @deadcow-enterprises/react-forms
 
+## 0.5.0
+
+### Minor Changes
+
+- b72c78f: Add initial value for form errors
+
+### Patch Changes
+
+- Updated dependencies [b72c78f]
+  - @deadcow-enterprises/forms-core@0.5.0
+
 ## 0.4.0
 
 ### Minor Changes
