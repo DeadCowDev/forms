@@ -30,10 +30,11 @@ export class Form<
 
 	constructor(
 		private readonly config: FormOptions<T>,
-		private readonly opts?: FormConfig,
+		private readonly opts?: FormConfig<T>,
 	) {
 		this.initialValue = this.getValueFromOptions(config);
 		this.value = this.getValueFromOptions(config);
+		this.errors = this.opts?.initialErrors || {};
 		this.registerFormListeners();
 		this.ids = this.setupIds(config);
 	}

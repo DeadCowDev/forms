@@ -41,8 +41,9 @@ export type OnChangeFormState<T, TForm extends FormEvent = FormEvent> = (
 	newFormValue: FormResult<T, TForm>,
 ) => void;
 
-export interface FormConfig {
+export interface FormConfig<T> {
 	focusOnError?: boolean;
 	onError?: FormErrorListenerFn;
 	onFormValid?: FormListenerFn;
+	initialErrors?: { [P in keyof T]?: FormError };
 }

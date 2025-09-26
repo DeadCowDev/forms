@@ -9,7 +9,7 @@ import { FormEvent, useEffect, useState } from 'react';
 
 export function useForm<T extends BaseFormType>(
 	config: FormOptions<T>,
-	options?: FormConfig,
+	options?: FormConfig<T>,
 ): FormResult<T, FormEvent> {
 	const [instance] = useState(new Form<T, FormEvent>(config, options));
 	const [formResult, setFormResult] = useState<FormResult<T, FormEvent>>(

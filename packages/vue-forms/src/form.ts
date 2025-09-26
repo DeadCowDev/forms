@@ -9,7 +9,7 @@ import { Ref, onMounted, onUnmounted, ref } from 'vue';
 
 export function useForm<T extends BaseFormType>(
 	config: FormOptions<T>,
-	options?: FormConfig,
+	options?: FormConfig<T>,
 ): Ref<FormResult<T, Event>> {
 	const instance = ref(new Form<T, Event>(config, options));
 	const formResult = ref(instance.value.currentState) as Ref<
