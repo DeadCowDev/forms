@@ -109,7 +109,7 @@ export class Form<
 					return;
 				}
 
-				errors[k] = error.error.errors.map((e) => e.message);
+				errors[k] = error.error.issues.map((e) => e.message);
 			}
 		});
 		return errors;
@@ -191,7 +191,7 @@ export class Form<
 			return undefined;
 		}
 
-		return validatorResult.error.errors.map((e) => e.message);
+		return validatorResult.error.issues.map((e) => e.message);
 	}
 
 	private handleSubmit(

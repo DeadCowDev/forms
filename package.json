@@ -17,16 +17,16 @@
 	"author": "Deadcow.enterprises",
 	"license": "MIT",
 	"devDependencies": {
-		"@changesets/cli": "^2.27.1",
-		"@vitest/coverage-istanbul": "^1.5.1",
-		"@vitest/ui": "^1.5.1",
-		"jsdom": "^22.1.0",
-		"prettier": "^3.2.5",
+		"@changesets/cli": "^2.29.7",
+		"@vitest/coverage-istanbul": "^3.2.4",
+		"@vitest/ui": "^3.2.4",
+		"jsdom": "^27.0.0",
+		"prettier": "^3.6.2",
 		"tsup": "^8.0.2",
-		"typescript": "^5.4.4",
-		"vitest": "^1.5.1"
+		"typescript": "^5.9.3",
+		"vitest": "^3.2.4"
 	},
 	"dependencies": {
-		"zod": "^3.22.4"
+		"zod": "^4.1.12"
 	}
 }
