@@ -73,8 +73,8 @@ importers:
         specifier: ^3.4.25
         version: 3.5.16(typescript@5.9.3)
       zod:
-        specifier: ^3.22.4
-        version: 3.25.36
+        specifier: ^4.1.12
+        version: 4.1.12
     devDependencies:
       '@testing-library/vue':
         specifier: ^8.0.3
@@ -2342,9 +2342,6 @@ packages:
   yallist@3.1.1:
     resolution: {integrity: sha512-a4UGQaWPH59mOXUYnAG2ewncQS4i4F43Tv3JoAM+s2VDAmS9NsK8GpDMLrCHPksFT7h3K6TOoUNn2pb7RoXx4g==}
 
-  zod@3.25.36:
-    resolution: {integrity: sha512-eRFS3i8T0IrpGdL8HQyqFAugGOn7jOjyGgGdtv5NY4Wkhi7lJDk732bNZ609YMIGFbLoaj6J69O1Mura23gfIw==}
-
   zod@4.1.12:
     resolution: {integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==}
 
@@ -4606,7 +4603,5 @@ snapshots:
   xmlchars@2.2.0: {}
 
   yallist@3.1.1: {}
-
-  zod@3.25.36: {}
 
   zod@4.1.12: {}
