@@ -1,5 +1,11 @@
 # @deadcow-enterprises/forms-core
 
+## 0.6.0
+
+### Minor Changes
+
+- a4103d6: Upgrade react and zod version to latest stables
+
 ## 0.5.0
 
 ### Minor Changes
